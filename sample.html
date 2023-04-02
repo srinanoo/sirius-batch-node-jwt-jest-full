@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form id="form1">
+        <input type="text" id="txtFName"><br>
+        <input type="text" id="txtLName"><br>
+        <button type="button" id="btnClick">Submit</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        jQuery(document).ready(function($){
+            $("#btnClick").click(() => {
+                // var form = $('#form1')[0];
+                // var data = new FormData(form);
+                // console.log(data);
+                let fname = $("#txtFName").val();
+                let lname = $("#txtLName").val();
+                // let data = {"fname": fname, "lname": lname};
+                let data = JSON.stringify({"fname": fname, "lname": lname});
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:4004/company/add/123",
+                    data: data,
+                    contentType: 'application/json',
+                    success : function(data) {
+                        console.log(data);
+                    },
+                    error: function (e) {
+                        alert(e.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>
